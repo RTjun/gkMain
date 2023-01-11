@@ -1,0 +1,13 @@
+dependencies {
+	compileOnly group: "com.liferay.portal", name: "release.portal.api"
+	compileOnly group: "com.liferay.portal", name: "com.liferay.util.taglib"
+	compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations"
+	compile group: 'com.liferay', name: 'com.liferay.portal.tools.bundle.support', version: '3.5.0'
+	compileOnly group: "com.liferay", name: "com.liferay.portal.dao.orm.custom.sql.api"
+
+
+	cssBuilder group: "com.liferay", name: "com.liferay.css.builder", version: "3.1.0"
+
+	compile project(":modules:com.ProductDAO:com.ProductDAO-service")
+	compile project(":modules:com.ProductDAO:com.ProductDAO-api")
+}

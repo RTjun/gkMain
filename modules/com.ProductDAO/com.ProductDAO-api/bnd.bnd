@@ -1,0 +1,10 @@
+Bundle-Name: com.ProductDAO-api
+Bundle-SymbolicName: ProductDAO.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	ProductDAO.exception,\
+	ProductDAO.model,\
+	ProductDAO.service,\
+	ProductDAO.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../com.ProductDAO-service/service.xml

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="ProductDAO.model.GKDetail">
+		<field name="GKDetailId" type="long" />
+		<field name="GKnumber" type="String" />
+		<field name="norm" type="String" />
+		<field name="GKName" type="String">
+			<hint name="max-length">2000</hint>
+		</field>
+		<field name="preOrder" type="String" />
+		<field name="GKComponent" type="String" />
+		<field name="freight" type="String" />
+		<field name="price" type="int" />
+		<field name="team" type="String" />
+		<field name="remark" type="String" />
+		<field name="imageName" type="String" />
+		<field name="total" type="int" />
+	</model>
+	<model name="ProductDAO.model.GKImage">
+		<field name="GKImageId" type="long" />
+		<field name="GKDetailId" type="long" />
+		<field name="imageName" type="String" />
+		<field name="imageData" type="String">
+			<hint-collection name="CLOB" />
+		</field>
+		<field name="mimeType" type="String" />
+	</model>
+</model-hints>

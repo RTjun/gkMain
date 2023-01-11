@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
+
+<service-builder dependency-injector="ds" package-path="ProductDAO">
+	<namespace>GK</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+	<entity local-service="true" name="GKDetail" uuid="false" remote-service="true">
+
+		<column name="GKDetailId" primary="true" type="long" />
+
+		<column name="GKnumber" type="String"/><!-- 編號 -->
+		<column name="norm" type="String"/> <!-- 規格 -->
+		<column name="GKName" type="String"/> <!-- 名稱 -->
+		<column name="preOrder" type="String"/> <!-- 預購出貨日期 -->
+		<column name="GKComponent" type="String"/>		<!-- 配件 -->
+		<column name="freight" type="String"/>	<!-- 運送 -->
+		<column name="price" type="int"/>	<!-- 價格 -->
+		<column name="team" type="String"/>	<!-- 團隊 -->
+		<column name="remark" type="String"/>	<!-- 備註 -->
+		<column name="imageName" type="String"/> <!-- 圖片 -->
+		<column name="total" type="int"/>	<!-- 體數 -->
+
+		<order by="asc">
+			<order-column name="GKDetailId" />
+		</order>
+
+	</entity>
+
+	<entity name="GKImage" local-service="true" uuid="false" remote-service="true">
+
+		<column name="GKImageId" primary="true" type="long" />
+		<column name="GKDetailId" type="long" />
+
+		<column name="imageName" type="String"/>	<!-- 圖片 -->
+		<column name="imageData" type="String"/>	<!-- 圖片資料 -->
+		<column name="mimeType" type="String" />	<!-- 檔案型別 -->
+
+	</entity>
+</service-builder>
