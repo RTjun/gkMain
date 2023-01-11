@@ -28,9 +28,8 @@ public class GKImageFinderImpl extends GKImageFinderBaseImpl implements GKImageF
             session = openSession();
 
             String sql = _CustomSQL.get(getClass(),FIND_IMG_BY_GKDETAILID);
-            System.out.println("sql"+sql);
+//            System.out.println("sql"+sql);
             SQLQuery q = session.createSQLQuery(sql);
-//            q.addScalar("GKDetailId", Type.LONG);
             q.addEntity("GKImage", GKImageImpl.class);
 
             QueryPos qPos = QueryPos.getInstance(q);

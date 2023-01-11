@@ -17,6 +17,8 @@
 
 <%@ page import="ProductDAO.model.GKDetail" %>
 <%@ page import="ProductDAO.service.GKDetailLocalServiceUtil" %>
+<%@ page import="ProductDAO.model.GKImage" %>
+<%@ page import="ProductDAO.service.GKImageLocalServiceUtil" %>
 
 <liferay-theme:defineObjects />
 

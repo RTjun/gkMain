@@ -1,7 +1,3 @@
-<%@ page import="ProductDAO.model.GKImage" %>
-<%@ page import="ProductDAO.service.GKImageLocalServiceUtil" %>
-<%@ page import="ProductDAO.service.GKImageLocalService" %>
-
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/META-INF/resources/init.jsp" %>
 
@@ -18,18 +14,23 @@
 <aui:row>
 	<%
 	for(int i=0;i< gkDetail.size();i++){
-		long gkDetailId = gkDetail.get(i).getGKDetailId();
-		System.out.println("ID"+gkDetailId);
-		GKImage gkImages = GKImageLocalServiceUtil.fetchGKImage(102);
+		long gkDetailId = gkDetail.get(i).getGKDetailId(); //取得每一欄 GKDetailId
 
-		List<GKImage> gkImage =  GKImageLocalServiceUtil.findIMGByGKDetailId(gkDetailId);
+		List<GKImage> gkImage =  GKImageLocalServiceUtil.findIMGByGKDetailId(gkDetailId); //依gkDetailId去找對應的圖片
 
 	%>
+	<liferay-portlet:renderURL var="GKDetail">
+		<liferay-portlet:param name="mvcPath" value="/META-INF/resources/product/GKDetail.jsp"/>
+		<liferay-portlet:param name="gkDetailId" value="<%=String.valueOf(gkDetailId)%>"/>
+	</liferay-portlet:renderURL>
+
 	<aui:col span="4">
 		<div style="margin-bottom:10px">
-			<img src="data:image/jpg;base64,<%=gkImage.get(0).getImageData()%>" style="width:400px;height:600px">
+			<a href="<%=GKDetail.toString()%>">
+				<img src="data:image/jpg;base64,<%=gkImage.get(0).getImageData()%>" style="width:400px;height:600px" alt=""/>
+			</a>
 		</div>
-		<div>
+		<div style="text-align: center">
 			<span><%= gkDetail.get(i).getGKName()%></span>
 		</div>
 	</aui:col>

@@ -31,7 +31,7 @@
 		<column name="GKImageId" primary="true" type="long" />
 		<column name="GKDetailId" type="long" />
 
-		<column name="imageName" type="String"/>	<!-- 圖片 -->
+		<column name="imageName" type="String"/>	<!-- 圖片名稱 -->
 		<column name="imageData" type="String"/>	<!-- 圖片資料 -->
 		<column name="mimeType" type="String" />	<!-- 檔案型別 -->
 
