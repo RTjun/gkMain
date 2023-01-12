@@ -1,5 +1,6 @@
 package com.portlet.portlet;
 
+import ProductDAO.model.Classify;
 import ProductDAO.model.GKDetail;
 import ProductDAO.model.GKImage;
 import ProductDAO.service.GKDetailLocalServiceUtil;
@@ -34,7 +35,7 @@ import java.nio.charset.StandardCharsets;
 @Component(
 	immediate = true,
 	property = {
-		"com.liferay.portlet.display-category=category.sample",
+		"com.liferay.portlet.display-category=category.GK",
 		"com.liferay.portlet.header-portlet-css=/css/main.css",
 		"com.liferay.portlet.instanceable=true",
 		"javax.portlet.display-name=Product",
@@ -64,6 +65,12 @@ public class ProductPortlet extends MVCPortlet {
 		String remark = ParamUtil.getString(request, "remark");
 		int total = ParamUtil.getInteger(request, "total");
 
+		String[] selectItems = ParamUtil.getStringValues(request,"selectItems");
+
+		String classifyId = String.join(",",selectItems);
+		System.out.println("selected:"+classifyId);
+
+
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
 		String imageName = uploadRequest.getFileName("file");
 
@@ -80,6 +87,7 @@ public class ProductPortlet extends MVCPortlet {
 		gkDetail.setTeam(team);
 		gkDetail.setRemark(remark);
 		gkDetail.setTotal(total);
+		gkDetail.setClassifyId(classifyId);
 
 		GKDetailLocalServiceUtil.addGKDetail(gkDetail);
 		long tempGKDetailId = gkDetail.getGKDetailId();

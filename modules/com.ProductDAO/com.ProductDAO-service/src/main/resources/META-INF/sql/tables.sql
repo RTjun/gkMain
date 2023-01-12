@@ -1,3 +1,8 @@
+create table GK_Classify (
+	ClassifyId LONG not null primary key,
+	classifyName VARCHAR(75) null
+);
+
 create table GK_GKDetail (
 	GKDetailId LONG not null primary key,
 	GKnumber VARCHAR(75) null,
@@ -10,7 +15,8 @@ create table GK_GKDetail (
 	team VARCHAR(75) null,
 	remark VARCHAR(75) null,
 	imageName VARCHAR(75) null,
-	total INTEGER
+	total INTEGER,
+	classifyId VARCHAR(75) null
 );
 
 create table GK_GKImage (

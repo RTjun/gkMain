@@ -18,6 +18,7 @@ import ProductDAO.model.GKImage;
 
 import ProductDAO.service.GKImageLocalService;
 import ProductDAO.service.GKImageLocalServiceUtil;
+import ProductDAO.service.persistence.ClassifyPersistence;
 import ProductDAO.service.persistence.GKDetailPersistence;
 import ProductDAO.service.persistence.GKImageFinder;
 import ProductDAO.service.persistence.GKImagePersistence;
@@ -453,6 +454,9 @@ public abstract class GKImageLocalServiceBaseImpl
 			throw new RuntimeException(reflectiveOperationException);
 		}
 	}
+
+	@Reference
+	protected ClassifyPersistence classifyPersistence;
 
 	@Reference
 	protected GKDetailPersistence gkDetailPersistence;

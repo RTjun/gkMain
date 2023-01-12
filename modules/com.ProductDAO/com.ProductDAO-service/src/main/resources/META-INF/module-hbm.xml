@@ -2,8 +2,15 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping auto-import="false" default-lazy="false">
+	<import class="ProductDAO.model.Classify" />
 	<import class="ProductDAO.model.GKDetail" />
 	<import class="ProductDAO.model.GKImage" />
+	<class name="ProductDAO.model.impl.ClassifyImpl" table="GK_Classify">
+		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="ClassifyId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="classifyName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
 	<class name="ProductDAO.model.impl.GKDetailImpl" table="GK_GKDetail">
 		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="GKDetailId" type="long">
 			<generator class="assigned" />
@@ -19,6 +26,7 @@
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="remark" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="imageName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="total" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="classifyId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="ProductDAO.model.impl.GKImageImpl" table="GK_GKImage">
 		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="GKImageId" type="long">

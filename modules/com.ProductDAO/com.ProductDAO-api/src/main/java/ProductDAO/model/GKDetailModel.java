@@ -230,6 +230,21 @@ public interface GKDetailModel extends BaseModel<GKDetail> {
 	 */
 	public void setTotal(int total);
 
+	/**
+	 * Returns the classify ID of this gk detail.
+	 *
+	 * @return the classify ID of this gk detail
+	 */
+	@AutoEscape
+	public String getClassifyId();
+
+	/**
+	 * Sets the classify ID of this gk detail.
+	 *
+	 * @param classifyId the classify ID of this gk detail
+	 */
+	public void setClassifyId(String classifyId);
+
 	@Override
 	public GKDetail cloneWithOriginalValues();
 

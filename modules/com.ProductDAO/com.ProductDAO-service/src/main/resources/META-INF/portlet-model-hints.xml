@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="ProductDAO.model.Classify">
+		<field name="ClassifyId" type="long" />
+		<field name="classifyName" type="String" />
+	</model>
 	<model name="ProductDAO.model.GKDetail">
 		<field name="GKDetailId" type="long" />
 		<field name="GKnumber" type="String" />
@@ -16,6 +20,7 @@
 		<field name="remark" type="String" />
 		<field name="imageName" type="String" />
 		<field name="total" type="int" />
+		<field name="classifyId" type="String" />
 	</model>
 	<model name="ProductDAO.model.GKImage">
 		<field name="GKImageId" type="long" />

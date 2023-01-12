@@ -9,7 +9,9 @@
 	<liferay-portlet:param name="mvcPath" value="/META-INF/resources/product/updateGKDetail.jsp"/>
 </liferay-portlet:renderURL>
 
-<aui:button	value="新增" href="<%=updateGKDetail %>"/>
+<aui:button-row>
+	<aui:button	value="新增" href="<%=updateGKDetail %>"/>
+</aui:button-row>
 
 <aui:row>
 	<%

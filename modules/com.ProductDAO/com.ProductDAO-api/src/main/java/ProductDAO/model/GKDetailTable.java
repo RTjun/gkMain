@@ -54,6 +54,8 @@ public class GKDetailTable extends BaseTable<GKDetailTable> {
 		"imageName", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<GKDetailTable, Integer> total = createColumn(
 		"total", Integer.class, Types.INTEGER, Column.FLAG_DEFAULT);
+	public final Column<GKDetailTable, String> classifyId = createColumn(
+		"classifyId", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 
 	private GKDetailTable() {
 		super("GK_GKDetail", GKDetailTable::new);

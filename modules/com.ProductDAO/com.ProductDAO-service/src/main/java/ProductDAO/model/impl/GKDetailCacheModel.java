@@ -60,7 +60,7 @@ public class GKDetailCacheModel
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(27);
 
 		sb.append("{GKDetailId=");
 		sb.append(GKDetailId);
@@ -86,6 +86,8 @@ public class GKDetailCacheModel
 		sb.append(imageName);
 		sb.append(", total=");
 		sb.append(total);
+		sb.append(", classifyId=");
+		sb.append(classifyId);
 		sb.append("}");
 
 		return sb.toString();
@@ -164,6 +166,13 @@ public class GKDetailCacheModel
 
 		gkDetailImpl.setTotal(total);
 
+		if (classifyId == null) {
+			gkDetailImpl.setClassifyId("");
+		}
+		else {
+			gkDetailImpl.setClassifyId(classifyId);
+		}
+
 		gkDetailImpl.resetOriginalValues();
 
 		return gkDetailImpl;
@@ -185,6 +194,7 @@ public class GKDetailCacheModel
 		imageName = objectInput.readUTF();
 
 		total = objectInput.readInt();
+		classifyId = objectInput.readUTF();
 	}
 
 	@Override
@@ -257,6 +267,13 @@ public class GKDetailCacheModel
 		}
 
 		objectOutput.writeInt(total);
+
+		if (classifyId == null) {
+			objectOutput.writeUTF("");
+		}
+		else {
+			objectOutput.writeUTF(classifyId);
+		}
 	}
 
 	public long GKDetailId;
@@ -271,5 +288,6 @@ public class GKDetailCacheModel
 	public String remark;
 	public String imageName;
 	public int total;
+	public String classifyId;
 
 }

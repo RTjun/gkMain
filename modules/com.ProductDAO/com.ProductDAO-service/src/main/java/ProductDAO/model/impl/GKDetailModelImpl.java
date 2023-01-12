@@ -73,7 +73,8 @@ public class GKDetailModelImpl
 		{"preOrder", Types.VARCHAR}, {"GKComponent", Types.VARCHAR},
 		{"freight", Types.VARCHAR}, {"price", Types.INTEGER},
 		{"team", Types.VARCHAR}, {"remark", Types.VARCHAR},
-		{"imageName", Types.VARCHAR}, {"total", Types.INTEGER}
+		{"imageName", Types.VARCHAR}, {"total", Types.INTEGER},
+		{"classifyId", Types.VARCHAR}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -92,10 +93,11 @@ public class GKDetailModelImpl
 		TABLE_COLUMNS_MAP.put("remark", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("imageName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("total", Types.INTEGER);
+		TABLE_COLUMNS_MAP.put("classifyId", Types.VARCHAR);
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table GK_GKDetail (GKDetailId LONG not null primary key,GKnumber VARCHAR(75) null,norm VARCHAR(75) null,GKName VARCHAR(2000) null,preOrder VARCHAR(75) null,GKComponent VARCHAR(75) null,freight VARCHAR(75) null,price INTEGER,team VARCHAR(75) null,remark VARCHAR(75) null,imageName VARCHAR(75) null,total INTEGER)";
+		"create table GK_GKDetail (GKDetailId LONG not null primary key,GKnumber VARCHAR(75) null,norm VARCHAR(75) null,GKName VARCHAR(2000) null,preOrder VARCHAR(75) null,GKComponent VARCHAR(75) null,freight VARCHAR(75) null,price INTEGER,team VARCHAR(75) null,remark VARCHAR(75) null,imageName VARCHAR(75) null,total INTEGER,classifyId VARCHAR(75) null)";
 
 	public static final String TABLE_SQL_DROP = "drop table GK_GKDetail";
 
@@ -264,6 +266,10 @@ public class GKDetailModelImpl
 		attributeGetterFunctions.put("total", GKDetail::getTotal);
 		attributeSetterBiConsumers.put(
 			"total", (BiConsumer<GKDetail, Integer>)GKDetail::setTotal);
+		attributeGetterFunctions.put("classifyId", GKDetail::getClassifyId);
+		attributeSetterBiConsumers.put(
+			"classifyId",
+			(BiConsumer<GKDetail, String>)GKDetail::setClassifyId);
 
 		_attributeGetterFunctions = Collections.unmodifiableMap(
 			attributeGetterFunctions);
@@ -496,6 +502,26 @@ public class GKDetailModelImpl
 		_total = total;
 	}
 
+	@JSON
+	@Override
+	public String getClassifyId() {
+		if (_classifyId == null) {
+			return "";
+		}
+		else {
+			return _classifyId;
+		}
+	}
+
+	@Override
+	public void setClassifyId(String classifyId) {
+		if (_columnOriginalValues == Collections.EMPTY_MAP) {
+			_setColumnOriginalValues();
+		}
+
+		_classifyId = classifyId;
+	}
+
 	public long getColumnBitmask() {
 		if (_columnBitmask > 0) {
 			return _columnBitmask;
@@ -564,6 +590,7 @@ public class GKDetailModelImpl
 		gkDetailImpl.setRemark(getRemark());
 		gkDetailImpl.setImageName(getImageName());
 		gkDetailImpl.setTotal(getTotal());
+		gkDetailImpl.setClassifyId(getClassifyId());
 
 		gkDetailImpl.resetOriginalValues();
 
@@ -591,6 +618,8 @@ public class GKDetailModelImpl
 		gkDetailImpl.setImageName(
 			this.<String>getColumnOriginalValue("imageName"));
 		gkDetailImpl.setTotal(this.<Integer>getColumnOriginalValue("total"));
+		gkDetailImpl.setClassifyId(
+			this.<String>getColumnOriginalValue("classifyId"));
 
 		return gkDetailImpl;
 	}
@@ -750,6 +779,14 @@ public class GKDetailModelImpl
 
 		gkDetailCacheModel.total = getTotal();
 
+		gkDetailCacheModel.classifyId = getClassifyId();
+
+		String classifyId = gkDetailCacheModel.classifyId;
+
+		if ((classifyId != null) && (classifyId.length() == 0)) {
+			gkDetailCacheModel.classifyId = null;
+		}
+
 		return gkDetailCacheModel;
 	}
 
@@ -854,6 +891,7 @@ public class GKDetailModelImpl
 	private String _remark;
 	private String _imageName;
 	private int _total;
+	private String _classifyId;
 
 	public <T> T getColumnValue(String columnName) {
 		Function<GKDetail, Object> function = _attributeGetterFunctions.get(
@@ -894,6 +932,7 @@ public class GKDetailModelImpl
 		_columnOriginalValues.put("remark", _remark);
 		_columnOriginalValues.put("imageName", _imageName);
 		_columnOriginalValues.put("total", _total);
+		_columnOriginalValues.put("classifyId", _classifyId);
 	}
 
 	private transient Map<String, Object> _columnOriginalValues;
@@ -930,6 +969,8 @@ public class GKDetailModelImpl
 		columnBitmasks.put("imageName", 1024L);
 
 		columnBitmasks.put("total", 2048L);
+
+		columnBitmasks.put("classifyId", 4096L);
 
 		_columnBitmasks = Collections.unmodifiableMap(columnBitmasks);
 	}

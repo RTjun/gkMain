@@ -1,7 +1,7 @@
 package com.portlet.constants;
 
 /**
- * @author fansy
+ * @author Ian
  */
 public class ProductPortletKeys {
 

@@ -53,6 +53,7 @@ public class GKDetailWrapper
 		attributes.put("remark", getRemark());
 		attributes.put("imageName", getImageName());
 		attributes.put("total", getTotal());
+		attributes.put("classifyId", getClassifyId());
 
 		return attributes;
 	}
@@ -130,11 +131,27 @@ public class GKDetailWrapper
 		if (total != null) {
 			setTotal(total);
 		}
+
+		String classifyId = (String)attributes.get("classifyId");
+
+		if (classifyId != null) {
+			setClassifyId(classifyId);
+		}
 	}
 
 	@Override
 	public GKDetail cloneWithOriginalValues() {
 		return wrap(model.cloneWithOriginalValues());
+	}
+
+	/**
+	 * Returns the classify ID of this gk detail.
+	 *
+	 * @return the classify ID of this gk detail
+	 */
+	@Override
+	public String getClassifyId() {
+		return model.getClassifyId();
 	}
 
 	/**
@@ -270,6 +287,16 @@ public class GKDetailWrapper
 	@Override
 	public void persist() {
 		model.persist();
+	}
+
+	/**
+	 * Sets the classify ID of this gk detail.
+	 *
+	 * @param classifyId the classify ID of this gk detail
+	 */
+	@Override
+	public void setClassifyId(String classifyId) {
+		model.setClassifyId(classifyId);
 	}
 
 	/**
