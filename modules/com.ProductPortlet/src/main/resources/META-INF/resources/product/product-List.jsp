@@ -8,10 +8,20 @@
 <liferay-portlet:renderURL var="updateGKDetail">
 	<liferay-portlet:param name="mvcPath" value="/META-INF/resources/product/updateGKDetail.jsp"/>
 </liferay-portlet:renderURL>
+<liferay-portlet:renderURL var="updateClassifyURL">
+	<liferay-portlet:param name="mvcPath" value="/META-INF/resources/classify/UpdateClassify.jsp"/>
+</liferay-portlet:renderURL>
 
-<aui:button-row>
-	<aui:button	value="新增" href="<%=updateGKDetail %>"/>
-</aui:button-row>
+<div>
+<aui:row>
+	<aui:col span="1">
+		<aui:button	value="新增GK詳情" href="<%=updateGKDetail %>"/>
+	</aui:col>
+	<aui:col span="1">
+		<aui:button value="新增歸類" href="<%=updateClassifyURL.toString()%>"/>
+	</aui:col>
+</aui:row>
+</div>
 
 <aui:row>
 	<%
