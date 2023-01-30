@@ -24,13 +24,17 @@ PortletPreferences preferences = renderRequest.getPreferences();
 
             <div class="slides fade1">
                 <div class="slider-numbers">2/4</div>
-                <div class="slider-image"><img class="plus" src="https://image.ibb.co/mGxNw5/background_2.jpg" style="width:400px;height:600px" alt="background_1"/></div>
+                <div class="slider-image">
+                    <img class="plus" src="https://image.ibb.co/mGxNw5/background_2.jpg" style="width:400px;height:600px" alt="background_1"/>
+                </div>
                 <div class="slider-caption">Caption 2</div>
             </div> <!-- slider -->
 
             <div class="slides fade1">
                 <div class="slider-numbers">3/4</div>
-                <div class="slider-image"><img class="plus" src="https://image.ibb.co/gd5gpQ/background_3.jpg" style="width:400px;height:600px" alt="background_1"/></div>
+                <div class="slider-image">
+                    <img class="plus" src="https://image.ibb.co/gd5gpQ/background_3.jpg" style="width:400px;height:600px" alt="background_1"/>
+                </div>
                 <div class="slider-caption">Caption 3</div>
             </div> <!-- slider -->
 
@@ -57,13 +61,13 @@ PortletPreferences preferences = renderRequest.getPreferences();
     </aui:col>
     <aui:col span="6">
         <div>
-            <span>商品編號 <%=gkDetail.getGKnumber()%></span>
+            <span>商品編號： <%=gkDetail.getGKnumber()%></span>
         </div>
         <div>
             <span><%=gkDetail.getGKName()%></span>
         </div>
         <div>
-            <span>TWD$ <%=gkDetail.getPrice()%></span>
+            <span>TWD$： <%=gkDetail.getPrice()%></span>
         </div>
         <div>
             <span></span>
@@ -191,12 +195,13 @@ String tabNames ="商品描述,送貨及付款方式,顧客評價";
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
 <script type="text/javascript"> <!-- bigImg js -->
 
-    $(document).ready(function() {
-        $(".plus").click(function(){
-            var _this = $(this);
-            imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
-        });
+
+    $(".plus").click(function(){
+        var _this = $(this);
+        imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
     });
+
+
     function imgShow(outerdiv,innerdiv,bigimg,_this){
         var src = _this.attr("src");
         $("#bigimg").attr("src",src);
@@ -207,7 +212,7 @@ String tabNames ="商品描述,送貨及付款方式,顧客評價";
             var realWidth = this.width;
             var realHeight = this.height;
             var imgWidth,imgHeight;
-            var scale = 0.8;
+            var scale = 1;
 
             if(realHeight>windowH*scale){
                 imgHeight = windowH*scale;
@@ -230,14 +235,31 @@ String tabNames ="商品描述,送貨及付款方式,顧客評價";
             $(outerdiv).fadeIn("fast");
         });
 
-        $(outerdiv).click(function (){
+        // $(".closebt").click(function (){
+        //     $("#outerdiv").fadeOut("fast");
+        // });
+
+        $("#outerdiv").click(function(){
             $(this).fadeOut("fast");
         });
+
+        $(".prev1").click(function (){
+            var i = $(".slider-container").children(".slides").children(".slider-image").index();
+            console.log("i:"+i);
+        })
     }
+
+            //-------------------------------//
+
 </script>
 
 <div id="outerdiv" style="position: fixed;top:0;left:0;background: rgba(0,0,0,0.7);z-index: 2;width: 100%;height: 100%;display: none;">
     <div id="innerdiv" style="position: absolute;">
         <img id="bigimg" src="" style="border:5px solid #fff;" />
+<%--        <a class="prev1" style="position: absolute;top:50%;right: 105%;transform: translateY(-50%);color: #FFF;font-weight: bold;font-size: 50px;">❮</a>--%>
+<%--        <a class="next1" style="position: absolute;top:50%;left: 105%;transform: translateY(-50%);color: #FFF;font-weight: bold;font-size: 50px;">❯</a>--%>
     </div>
+<%--    <div class="closebt" style="color: #FFF;font-weight: bold;font-size: 50px;">--%>
+<%--        X--%>
+<%--    </div>--%>
 </div>
