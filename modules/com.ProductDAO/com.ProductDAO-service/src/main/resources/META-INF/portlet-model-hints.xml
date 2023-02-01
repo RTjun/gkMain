@@ -31,4 +31,8 @@
 		</field>
 		<field name="mimeType" type="String" />
 	</model>
+	<model name="ProductDAO.model.Norm">
+		<field name="NormId" type="long" />
+		<field name="normName" type="String" />
+	</model>
 </model-hints>

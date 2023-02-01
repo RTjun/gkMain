@@ -26,3 +26,8 @@ create table GK_GKImage (
 	imageData TEXT null,
 	mimeType VARCHAR(75) null
 );
+
+create table GK_Norm (
+	NormId LONG not null primary key,
+	normName VARCHAR(75) null
+);

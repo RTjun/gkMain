@@ -45,5 +45,12 @@
 		<column name="classifyName" type="String"/>  <!--歸類名稱-->
 
 	</entity>
+
+	<entity name="Norm" local-service="true" uuid="false" remote-service="true">
+
+		<column name="NormId" type="long" primary="true"/>
+
+		<column name="normName" type="String"/> <!-- 規格 -->
+	</entity>
 	
 </service-builder>

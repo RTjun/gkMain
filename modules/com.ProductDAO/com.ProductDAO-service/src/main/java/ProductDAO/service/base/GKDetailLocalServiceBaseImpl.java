@@ -22,6 +22,7 @@ import ProductDAO.service.persistence.ClassifyPersistence;
 import ProductDAO.service.persistence.GKDetailPersistence;
 import ProductDAO.service.persistence.GKImageFinder;
 import ProductDAO.service.persistence.GKImagePersistence;
+import ProductDAO.service.persistence.NormPersistence;
 
 import com.liferay.petra.sql.dsl.query.DSLQuery;
 import com.liferay.portal.aop.AopService;
@@ -468,6 +469,9 @@ public abstract class GKDetailLocalServiceBaseImpl
 
 	@Reference
 	protected GKImageFinder gkImageFinder;
+
+	@Reference
+	protected NormPersistence normPersistence;
 
 	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService

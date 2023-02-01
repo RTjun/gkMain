@@ -1,6 +1,5 @@
 package com.portlet.portlet;
 
-import ProductDAO.model.Classify;
 import ProductDAO.model.GKDetail;
 import ProductDAO.model.GKImage;
 import ProductDAO.service.GKDetailLocalServiceUtil;
@@ -68,8 +67,6 @@ public class ProductPortlet extends MVCPortlet {
 		String[] selectItems = ParamUtil.getStringValues(request,"selectItems");
 
 		String classifyId = String.join(",",selectItems);
-		System.out.println("selected:"+classifyId);
-
 
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
 		String imageName = uploadRequest.getFileName("file");

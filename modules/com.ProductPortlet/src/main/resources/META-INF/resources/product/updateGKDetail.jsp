@@ -1,7 +1,3 @@
-<%@ page import="ProductDAO.model.Classify" %>
-<%@ page import="ProductDAO.service.ClassifyLocalServiceUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.KeyValuePair" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/META-INF/resources/init.jsp" %>
 
@@ -24,22 +20,22 @@ List<KeyValuePair> rightList = new ArrayList<KeyValuePair>();
     <aui:col span="6" style="margin-left:50px;">
       <aui:row>
         <aui:col span="5">
-          <aui:input name="file" type="file"/>
+          <aui:input name="file" type="file" required="true"/>
         </aui:col>
       </aui:row>
     </aui:col>
 
     <aui:col span="4">
-      <aui:input name="GKnumber" label="商品編號"/>
-      <aui:input name="norm" label="規格"/>
-      <aui:input name="GKName" label="商品名稱"/>
-      <aui:input name="preOrder" label="預購出貨日期"/>
-      <aui:input name="GKComponent" label="配件"/>
-      <aui:input name="freight" label="運送"/>
-      <aui:input name="price" label="價格"/>
-      <aui:input name="team" label="團隊"/>
-      <aui:input name="remark" label="備註"/>
-      <aui:input name="total" label="體數"/>
+      <aui:input name="GKnumber" label="商品編號" required="true"/>
+      <aui:input name="norm" label="規格" required="true"/>
+      <aui:input name="GKName" label="商品名稱" required="true"/>
+      <aui:input name="preOrder" label="預購出貨日期" required="true"/>
+      <aui:input name="GKComponent" label="配件" required="true"/>
+      <aui:input name="freight" label="運送" required="true"/>
+      <aui:input name="price" label="價格" required="true"/>
+      <aui:input name="team" label="團隊" required="true"/>
+      <aui:input name="remark" label="備註" required="true"/>
+      <aui:input name="total" label="體數" required="true"/>
     </aui:col>
   </aui:row>
 
@@ -69,8 +65,6 @@ List<KeyValuePair> rightList = new ArrayList<KeyValuePair>();
     var selectedValues = Liferay.Util.listSelect('#<portlet:namespace/>selectedValues');
 
     selectItems.val(selectedValues);
-
-    console.log("selectItems :"+selectItems.val());
 
     submitForm('#<portlet:namespace/>fm');
 
