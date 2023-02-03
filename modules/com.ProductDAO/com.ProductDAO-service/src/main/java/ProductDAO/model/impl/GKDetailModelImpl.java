@@ -97,7 +97,7 @@ public class GKDetailModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table GK_GKDetail (GKDetailId LONG not null primary key,GKnumber VARCHAR(75) null,norm VARCHAR(75) null,GKName VARCHAR(2000) null,preOrder VARCHAR(75) null,GKComponent VARCHAR(75) null,freight VARCHAR(75) null,price INTEGER,team VARCHAR(75) null,remark VARCHAR(75) null,imageName VARCHAR(75) null,total INTEGER,classifyId VARCHAR(75) null)";
+		"create table GK_GKDetail (GKDetailId LONG not null primary key,GKnumber VARCHAR(75) null,norm VARCHAR(2000) null,GKName VARCHAR(2000) null,preOrder VARCHAR(75) null,GKComponent VARCHAR(75) null,freight VARCHAR(75) null,price INTEGER,team VARCHAR(75) null,remark VARCHAR(75) null,imageName VARCHAR(75) null,total INTEGER,classifyId VARCHAR(75) null)";
 
 	public static final String TABLE_SQL_DROP = "drop table GK_GKDetail";
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+    <sql id="ProductDAO.service.persistence.NormFinder.findQuarterByNormId">
+        <![CDATA[
+		SELECT * FROM GK_Norm
+		WHERE 1=1
+		[$QUARTER$]
+	]]>
+    </sql>
+</custom-sql>

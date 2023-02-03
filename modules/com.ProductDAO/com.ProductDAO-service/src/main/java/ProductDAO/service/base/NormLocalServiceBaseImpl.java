@@ -22,6 +22,7 @@ import ProductDAO.service.persistence.ClassifyPersistence;
 import ProductDAO.service.persistence.GKDetailPersistence;
 import ProductDAO.service.persistence.GKImageFinder;
 import ProductDAO.service.persistence.GKImagePersistence;
+import ProductDAO.service.persistence.NormFinder;
 import ProductDAO.service.persistence.NormPersistence;
 
 import com.liferay.petra.sql.dsl.query.DSLQuery;
@@ -469,6 +470,9 @@ public abstract class NormLocalServiceBaseImpl
 
 	@Reference
 	protected NormPersistence normPersistence;
+
+	@Reference
+	protected NormFinder normFinder;
 
 	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService

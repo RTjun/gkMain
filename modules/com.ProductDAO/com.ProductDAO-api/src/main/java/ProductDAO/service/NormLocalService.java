@@ -200,6 +200,8 @@ public interface NormLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Norm fetchNorm(long NormId);
 
+	public List<Norm> findQuarterByNormId(int begin, int end);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
 

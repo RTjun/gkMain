@@ -222,6 +222,13 @@ public class NormLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<ProductDAO.model.Norm> findQuarterByNormId(
+		int begin, int end) {
+
+		return _normLocalService.findQuarterByNormId(begin, end);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
 		getActionableDynamicQuery() {
 

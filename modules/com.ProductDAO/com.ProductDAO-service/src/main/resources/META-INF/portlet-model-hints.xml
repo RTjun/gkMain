@@ -8,7 +8,9 @@
 	<model name="ProductDAO.model.GKDetail">
 		<field name="GKDetailId" type="long" />
 		<field name="GKnumber" type="String" />
-		<field name="norm" type="String" />
+		<field name="norm" type="String">
+			<hint name="max-length">2000</hint>
+		</field>
 		<field name="GKName" type="String">
 			<hint name="max-length">2000</hint>
 		</field>

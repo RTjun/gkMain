@@ -208,6 +208,10 @@ public class NormLocalServiceUtil {
 		return getService().fetchNorm(NormId);
 	}
 
+	public static List<Norm> findQuarterByNormId(int begin, int end) {
+		return getService().findQuarterByNormId(begin, end);
+	}
+
 	public static com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery
 		getActionableDynamicQuery() {
 

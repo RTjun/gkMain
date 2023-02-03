@@ -3,12 +3,21 @@
 
 <%
 List<Classify> classifies = ClassifyLocalServiceUtil.getClassifies(-1,-1);
+List<Norm> norms = NormLocalServiceUtil.getNorms(-1,-1);
 
+//classifies
 List<KeyValuePair> leftList = new ArrayList<KeyValuePair>();
+List<KeyValuePair> rightList = new ArrayList<KeyValuePair>();
 for(int i=0; i<classifies.size();i++){
   leftList.add(new KeyValuePair(String.valueOf(classifies.get(i).getClassifyId()),classifies.get(i).getClassifyName()));
 }
-List<KeyValuePair> rightList = new ArrayList<KeyValuePair>();
+
+//norms
+List<KeyValuePair> nleftList = new ArrayList<>();
+List<KeyValuePair> nrightList = new ArrayList<>();
+for(int i=0; i< norms.size();i++){
+  nleftList.add(new KeyValuePair(String.valueOf(norms.get(i).getNormId()),norms.get(i).getNormName()));
+}
 %>
 
 <liferay-portlet:actionURL name="updateGKDetail" var="updateGKDetailURL">
@@ -20,14 +29,13 @@ List<KeyValuePair> rightList = new ArrayList<KeyValuePair>();
     <aui:col span="6" style="margin-left:50px;">
       <aui:row>
         <aui:col span="5">
-          <aui:input name="file" type="file" required="true"/>
+          <aui:input name="file" type="file" required="true" multiple="true"/>
         </aui:col>
       </aui:row>
     </aui:col>
 
     <aui:col span="4">
       <aui:input name="GKnumber" label="商品編號" required="true"/>
-      <aui:input name="norm" label="規格" required="true"/>
       <aui:input name="GKName" label="商品名稱" required="true"/>
       <aui:input name="preOrder" label="預購出貨日期" required="true"/>
       <aui:input name="GKComponent" label="配件" required="true"/>
@@ -45,8 +53,18 @@ List<KeyValuePair> rightList = new ArrayList<KeyValuePair>();
   <div>
   <liferay-ui:input-move-boxes
           leftBoxName="availableValues" leftList="<%=leftList%>"
-          leftTitle="增加標籤" rightBoxName="selectedValues"
+          leftTitle="可用標籤" rightBoxName="selectedValues"
           rightList="<%=rightList%>" rightTitle="當前標籤" />
+  </div>
+  
+  <aui:input name="selectNorms" type="hidden"/>
+  <aui:input name="availableNorms" type="hidden"/>
+
+  <div>
+    <liferay-ui:input-move-boxes
+            leftBoxName="nAvailableValues" leftList="<%=nleftList%>"
+            leftTitle="可用規格" rightBoxName="nSelectedValues"
+            rightList="<%=nrightList%>" rightTitle="當前規格"/>
   </div>
 
   <aui:row>
@@ -63,7 +81,10 @@ List<KeyValuePair> rightList = new ArrayList<KeyValuePair>();
 
     var selectItems = A.one('#<portlet:namespace/>selectItems');
     var selectedValues = Liferay.Util.listSelect('#<portlet:namespace/>selectedValues');
+    var selectNorms = A.one('#<portlet:namespace/>selectNorms');
+    var nSelectedValues = Liferay.Util.listSelect('#<portlet:namespace/>nSelectedValues');
 
+    selectNorms.val(nSelectedValues);
     selectItems.val(selectedValues);
 
     submitForm('#<portlet:namespace/>fm');

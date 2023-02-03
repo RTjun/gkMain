@@ -9,10 +9,7 @@ import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.PortletURLFactoryUtil;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
-import com.liferay.portal.kernel.util.MimeTypesUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.util.*;
 import com.portlet.constants.ProductPortletKeys;
 
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
@@ -65,17 +62,21 @@ public class ProductPortlet extends MVCPortlet {
 		int total = ParamUtil.getInteger(request, "total");
 
 		String[] selectItems = ParamUtil.getStringValues(request,"selectItems");
+		String[] selectNorms = ParamUtil.getStringValues(request,"selectNorms");
 
 		String classifyId = String.join(",",selectItems);
+		String normId = String.join(",",selectNorms);
 
 		UploadPortletRequest uploadRequest = PortalUtil.getUploadPortletRequest(request);
-		String imageName = uploadRequest.getFileName("file");
+		String[] imageNames = uploadRequest.getFileNames("file");
+		String imageName = String.join(",",imageNames);
+		String[] imageNameArray = StringUtil.split(imageName);
 
 		GKDetail gkDetail = GKDetailLocalServiceUtil.createGKDetail(
 				CounterLocalServiceUtil.increment(GKDetail.class.getName()));
 
 		gkDetail.setGKnumber(GKnumber);
-		gkDetail.setNorm(norm);
+		gkDetail.setNorm(normId);
 		gkDetail.setGKName(GKName);
 		gkDetail.setPreOrder(preOrder);
 		gkDetail.setGKComponent(GKComponent);
@@ -89,22 +90,25 @@ public class ProductPortlet extends MVCPortlet {
 		GKDetailLocalServiceUtil.addGKDetail(gkDetail);
 		long tempGKDetailId = gkDetail.getGKDetailId();
 
-		if(imageName != null) {
-			gkDetail.setImageName(imageName);
-			File file = uploadRequest.getFile("file");
-			byte[] bytes = loadFile(file);
-			byte[] encoded = Base64.encodeBase64(bytes);
-			String encodedString = new String(encoded, StandardCharsets.UTF_8);
+		if(imageNames.length != 0) {
 
-			GKImage gkImage = GKImageLocalServiceUtil.createGKImage(
-					CounterLocalServiceUtil.increment(GKImage.class.getName()));
+			for(int i=0;i<imageNameArray.length;i++){
+				gkDetail.setImageName(imageNameArray[i]);
+				File[] files = uploadRequest.getFiles("file");
+				byte[] bytes = loadFile(files[i]);
+				byte[] encoded = Base64.encodeBase64(bytes);
+				String encodedString = new String(encoded, StandardCharsets.UTF_8);
 
-			gkImage.setGKDetailId(tempGKDetailId);
-			gkImage.setImageName(imageName);
-			gkImage.setImageData(encodedString);
-			gkImage.setMimeType(MimeTypesUtil.getContentType(file));
+				GKImage gkImage = GKImageLocalServiceUtil.createGKImage(
+						CounterLocalServiceUtil.increment(GKImage.class.getName()));
 
-			GKImageLocalServiceUtil.addGKImage(gkImage);
+				gkImage.setGKDetailId(tempGKDetailId);
+				gkImage.setImageName(imageNameArray[i]);
+				gkImage.setImageData(encodedString);
+				gkImage.setMimeType(MimeTypesUtil.getContentType(files[i]));
+
+				GKImageLocalServiceUtil.addGKImage(gkImage);
+			}
 		}
 
 //		LiferayPortletURL portletURL = PortletURLFactoryUtil.create(

@@ -6,7 +6,7 @@ create table GK_Classify (
 create table GK_GKDetail (
 	GKDetailId LONG not null primary key,
 	GKnumber VARCHAR(75) null,
-	norm VARCHAR(75) null,
+	norm VARCHAR(2000) null,
 	GKName VARCHAR(2000) null,
 	preOrder VARCHAR(75) null,
 	GKComponent VARCHAR(75) null,

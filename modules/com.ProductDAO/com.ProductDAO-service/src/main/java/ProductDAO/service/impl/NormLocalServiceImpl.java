@@ -14,11 +14,16 @@
 
 package ProductDAO.service.impl;
 
+import ProductDAO.model.Norm;
 import ProductDAO.service.base.NormLocalServiceBaseImpl;
 
+import ProductDAO.service.persistence.NormFinder;
 import com.liferay.portal.aop.AopService;
 
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
@@ -28,4 +33,12 @@ import org.osgi.service.component.annotations.Component;
 	service = AopService.class
 )
 public class NormLocalServiceImpl extends NormLocalServiceBaseImpl {
+
+	@Reference
+	NormFinder _normFinder;
+	public List<Norm> findQuarterByNormId(int begin,int end){
+
+		List<Norm> normList = _normFinder.findQuarterByNormId(begin,end);
+		return normList;
+	}
 }

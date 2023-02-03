@@ -6,7 +6,7 @@ long gkDetailId = ParamUtil.getLong(request,"gkDetailId");
 String norm = ParamUtil.getString(request,"norm");
 GKDetail gkDetail = GKDetailLocalServiceUtil.fetchGKDetail(gkDetailId);
 PortletPreferences preferences = renderRequest.getPreferences();
-    List<GKImage> gkImage =  GKImageLocalServiceUtil.findIMGByGKDetailId(gkDetailId);
+List<GKImage> gkImage =  GKImageLocalServiceUtil.findIMGByGKDetailId(gkDetailId);//用gkDetailId去取gkImage
 %>
 
 <aui:row>
@@ -14,46 +14,32 @@ PortletPreferences preferences = renderRequest.getPreferences();
 
         <div class="slider-container" style="width:400px; height: 700px">
 
+            <%
+                for(int i=0;i<gkImage.size();i++){
+            %>
             <div class="slides fade1">
-                <div class="slider-numbers">1/4</div>
+                <div class="slider-numbers"><%=(i+1)+"/"+gkImage.size()%></div>
                 <div class="slider-image">
-                    <img class="plus" src="data:image/jpg;base64,<%=gkImage.get(0).getImageData()%>" style="width:400px;height:600px" alt="background_1"/>
+                    <img class="plus" src="data:image/jpg;base64,<%=gkImage.get(i).getImageData()%>" style="width:400px;height:600px" alt="background_1"/>
                 </div>
-                <div class="slider-caption">Caption 1</div>
+                <div class="slider-caption"><%="Caption "+(i+1)%></div>
             </div> <!-- slider -->
-
-            <div class="slides fade1">
-                <div class="slider-numbers">2/4</div>
-                <div class="slider-image">
-                    <img class="plus" src="https://image.ibb.co/mGxNw5/background_2.jpg" style="width:400px;height:600px" alt="background_1"/>
-                </div>
-                <div class="slider-caption">Caption 2</div>
-            </div> <!-- slider -->
-
-            <div class="slides fade1">
-                <div class="slider-numbers">3/4</div>
-                <div class="slider-image">
-                    <img class="plus" src="https://image.ibb.co/gd5gpQ/background_3.jpg" style="width:400px;height:600px" alt="background_1"/>
-                </div>
-                <div class="slider-caption">Caption 3</div>
-            </div> <!-- slider -->
-
-            <div class="slides fade1">
-                <div class="slider-numbers">4/4</div>
-                <div class="slider-image"><img class="plus" src="https://image.ibb.co/jOgXw5/background_4.jpg" style="width:400px;height:600px" alt="background_1"/></div>
-                <div class="slider-caption">Caption 4</div>
-            </div> <!-- slider -->
-
+            <%
+                }
+            %>
             <!-- Slider Next and Previous buttons -->
             <a class="prev" onclick="plusIndex(-1)">❮</a>
             <a class="next" onclick="plusIndex(+1)">❯</a>
 
             <!-- Slider Selection Bullets -->
             <div class="slider-bullets" id="slider-bullets">
-                <span class="dots" onclick="currentSlide(1)"></span>
-                <span class="dots" onclick="currentSlide(2)"></span>
-                <span class="dots" onclick="currentSlide(3)"></span>
-                <span class="dots" onclick="currentSlide(4)"></span>
+                <%
+                    for(int i=0;i<gkImage.size();i++){
+                %>
+                <span class="dots" onclick="currentSlide(<%=i%>)"></span>
+                <%
+                    }
+                %>
             </div> <!-- Slider Bullets -->
 
         </div>
@@ -67,19 +53,23 @@ PortletPreferences preferences = renderRequest.getPreferences();
             <span><%=gkDetail.getGKName()%></span>
         </div>
         <div>
-            <span>TWD$： <%=gkDetail.getPrice()%></span>
-        </div>
-        <div>
             <span></span>
             <aui:select name="norm" label="規格">
                 <aui:option selected="true">請選擇</aui:option>
-                <aui:option disabled="true">1/4</aui:option>
-                <aui:option>全款(不含國際運費)</aui:option>
-                <aui:option>訂金(不含國際運費)</aui:option>
-                <aui:option disabled="true">1/6</aui:option>
-                <aui:option>全款(不含國際運費)</aui:option>
-                <aui:option>訂金(不含國際運費)</aui:option>
+                <%
+                    String gkNorm = gkDetail.getNorm(); //抓到所有gkDetail存的normId
+                    String[] gknormArray = StringUtil.split(gkNorm); //把DB存的逗號去掉成String陣列
+                    for(int i=0;i<gknormArray.length;i++){ //norm陣列有多長就迴圈幾次
+                        Norm normList = NormLocalServiceUtil.fetchNorm(Long.valueOf(gknormArray[i]));//以迴圈去選要抓哪個Id
+                %>
+                <aui:option value="<%=normList.getNormName()%>"><%=normList.getNormName()%></aui:option>
+                <%
+                    }
+                %>
             </aui:select>
+        </div>
+        <div id="pricediv">
+
         </div>
     </aui:col>
 </aui:row>
@@ -101,11 +91,21 @@ String tabNames ="商品描述,送貨及付款方式,顧客評價";
             <span><%=gkDetail.getGKName()%></span>
         </aui:row>
         <aui:row>
-            <span><%=gkDetail.getNorm()%></span>
+            <%
+                String classifyId =gkDetail.getClassifyId();
+                String[] classifyArray = StringUtil.split(classifyId);
+                for(int i =0;i<classifyArray.length;i++){
+                    Classify classifyList = ClassifyLocalServiceUtil.fetchClassify(Long.valueOf(classifyArray[i]));
+            %>
+            <span><%=classifyList.getClassifyName()%></span>
+            <%
+                }
+            %>
+
         </aui:row>
-        <aui:row>
-            <span><%=gkDetail.getPrice()%></span>
-        </aui:row>
+<%--        <aui:row id="price">--%>
+
+<%--        </aui:row>--%>
         <aui:row>
             <span><%=gkDetail.getTotal()%></span>
         </aui:row>
@@ -137,7 +137,7 @@ String tabNames ="商品描述,送貨及付款方式,顧客評價";
     </div>
 </liferay-ui:tabs>
 
-<script> <!--slider js -->
+<script > <!--slider js -->
     var slideIndex = 1;
 
     function showImage(n) { // for Display the first Image
@@ -191,12 +191,30 @@ String tabNames ="商品描述,送貨及付款方式,顧客評價";
     }
 
 </script>
+<aui:script use="aui-base,aui-node,liferay-form">
+
+    A.one('#<portlet:namespace/>norm').on('change',function (){ //選擇規格後顯示金額js
+        var norm = A.one('#<portlet:namespace/>norm');
+        var select = A.one('#<portlet:namespace/>norm').val();
+        var price = A.one('#price');
+        if(price){
+            price.remove();
+        }
+        if(select !='' && !norm.contains("請選擇")){
+            var str = norm.val().replaceAll(" ",",");
+            var strArry = str.split(",",2).at(1);
+
+            var pricediv = A.one('#pricediv');
+            pricediv.append('<span id="price" style="font-size:18px;">金額$TWD ：'+strArry+'</span>');
+        }
+    });
+</aui:script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.js"></script>
 <script type="text/javascript"> <!-- bigImg js -->
 
 
-    $(".plus").click(function(){
+    $(".plus").click(function(){  //圖片放大
         var _this = $(this);
         imgShow("#outerdiv", "#innerdiv", "#bigimg", _this);
     });
